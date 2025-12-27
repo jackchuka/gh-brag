@@ -5,7 +5,7 @@ go 1.25.5
 require (
 	github.com/briandowns/spinner v1.23.2
 	github.com/charmbracelet/lipgloss v1.1.1-0.20250319133953-166f707985bc
-	github.com/cli/go-gh/v2 v2.12.1
+	github.com/cli/go-gh/v2 v2.13.0
 	github.com/spf13/cobra v1.10.2
 	gopkg.in/yaml.v3 v3.0.1
 )
