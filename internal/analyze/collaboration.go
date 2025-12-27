@@ -41,7 +41,7 @@ func (a *Analyzer) collaboration(events []data.Event) Collaboration {
 }
 
 func sortStats(m map[string]int) []UserStat {
-	var s []UserStat
+	s := make([]UserStat, 0, len(m))
 	for k, v := range m {
 		s = append(s, UserStat{Login: k, Count: v})
 	}

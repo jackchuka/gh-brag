@@ -90,7 +90,7 @@ func (a *Analyzer) Analyze(events []data.Event) Metrics {
 		}
 
 		year, week := t.ISOWeek()
-		key := time.Date(year, 1, 1, 0, 0, 0, 0, time.UTC).AddDate(0, 0, (week-1)*7).Format("2006-01-02")
+		key := getStartOfWeek(year, week).Format("2006-01-02")
 		trendAgg[key]++
 	}
 
@@ -98,9 +98,12 @@ func (a *Analyzer) Analyze(events []data.Event) Metrics {
 	report.PeriodEnd = maxDate
 
 	if !minDate.IsZero() {
-		year, week := minDate.ISOWeek()
-		current := time.Date(year, 1, 1, 0, 0, 0, 0, time.UTC).AddDate(0, 0, (week-1)*7)
-		for current.Before(maxDate) || current.Equal(maxDate) {
+		minYear, minWeek := minDate.ISOWeek()
+		maxYear, maxWeek := maxDate.ISOWeek()
+		current := getStartOfWeek(minYear, minWeek)
+		end := getStartOfWeek(maxYear, maxWeek)
+
+		for !current.After(end) {
 			key := current.Format("2006-01-02")
 			report.WeeklyTrend = append(report.WeeklyTrend, TrendPoint{
 				Date:  key,
@@ -127,4 +130,18 @@ func (a *Analyzer) Analyze(events []data.Event) Metrics {
 	report.Collaboration = a.collaboration(events)
 
 	return report
+}
+
+// getStartOfWeek returns the Monday of the given ISO year and week.
+func getStartOfWeek(year, week int) time.Time {
+	// Jan 4th is always in ISO week 1
+	t := time.Date(year, 1, 4, 0, 0, 0, 0, time.UTC)
+	// Roll back to Monday
+	daysToRollBack := int(t.Weekday()) - 1
+	if daysToRollBack < 0 {
+		daysToRollBack = 6 // Sunday
+	}
+	t = t.AddDate(0, 0, -daysToRollBack)
+	// Add (week-1) weeks
+	return t.AddDate(0, 0, (week-1)*7)
 }
