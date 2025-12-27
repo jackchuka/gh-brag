@@ -1,0 +1,27 @@
+# gh-brag default configuration
+# This file serves as both the default config and an example for users.
+
+
+themes:
+  - name: "Feature"
+    keywords: ["feat", "feature", "new", "intro", "support", "introduce"]
+  - name: "Maintenance"
+    keywords: ["chore", "bump", "dep", "ci", "lint", "test"]
+  - name: "Bug Fix"
+    keywords: ["fix", "bug", "issue", "error", "crash"]
+  - name: "Docs"
+    keywords: ["doc", "readme", "guide"]
+  - name: "Refactor"
+    keywords: ["refactor", "typo", "clean", "mv", "move", "rename"]
+
+metrics:
+  ownership_threshold: 5
+  action_weights:
+    merged: 10.0
+    authored: 5.0
+    reviewed: 2.0
+  theme_weights:
+    Feature: 1.5
+    Maintenance: 1.0
+    Refactor: 1.2
+    Docs: 0.8

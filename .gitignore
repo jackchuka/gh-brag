@@ -1,2 +1,6 @@
 /gh-brag
 /gh-brag.exe
+
+# Default output files
+/gh-brag.report.yaml
+/gh-brag.events.jsonl
