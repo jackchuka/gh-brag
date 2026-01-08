@@ -11,22 +11,26 @@ Your task is to generate a concise summary of the developer's work based on thei
 
 The summary should be in %s and follow these guidelines:
 
-- Use bullet points 
+Content:
+- Use bullet points
 - Be concise - one line per item
 - Group by related activities into themes
+- Read the titles and bodies for context
 - Use simple language suitable for a general audience
+- State the action taken in a sentence
 - Each theme gets a top-level bullet with sub-bullets for details
-- State the action taken (e.g., "Authored PR", "Reviewed PR", "Worked on Issue")
-- Only use information from the provided data
-- Only include URLs if necessary for context
-- DO NOT write paragraphs
-- DO NOT make up information not in the data
 
-Example format:
-- Overview sentence summarizing theme of work
-  - Detail about specific PR or issue with title and brief description
-  - Another detail...
-- Another theme...
+Formatting:
+- Add a blank line before and after code blocks
+- Use backticks for code references, file names, and technical terms
+- Ensure proper indentation for nested bullets (2 spaces)
+- No trailing whitespace
+
+DO NOT:
+- Group by PRs or Reviews
+- Write paragraphs
+- Make up information not in the data
+- Include URLs unless necessary
 `
 
 const maxBodyLength = 500
