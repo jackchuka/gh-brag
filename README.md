@@ -8,6 +8,8 @@
 
 ## ✨ Features
 
+- **📝 Daily Reports**: Generate standup-ready reports of your GitHub activity with optional AI summarization.
+- **🤖 LLM Summarization**: Use GitHub Models API to create concise, themed summaries in any language.
 - **🎯 Impact Scoring**: Automatically calculates an "Impact Score" based on weighted actions and thematic focus.
 - **📊 TUI Dashboard**: A stunning terminal interface showing:
   - **Theme Distribution**: See where you're spending your time (Feature, Refactor, Bugfix, etc.).
@@ -39,9 +41,43 @@ gh extension install jackchuka/gh-brag
 
 ## 🛠 Usage
 
-Get insights into your GitHub activity in two simple steps:
+### Daily Report
 
-### 1. Collect your activity
+Generate a quick daily standup report of your GitHub activity:
+
+```bash
+gh brag daily
+```
+
+Options:
+
+- `--date 2026-01-07` - Report for a specific date
+- `--from 2026-01-01 --to 2026-01-07` - Report for a date range
+- `--format plain|json|yaml` - Output format (default: plain)
+- `--org mycompany` - Filter by organization (repeatable)
+
+#### LLM Summarization
+
+Generate an AI-powered summary using GitHub Models:
+
+```bash
+gh brag daily --summarize
+gh brag daily --summarize --summarize-lang ja # Japanese
+gh brag daily --summarize --summarize-prompt "be formal"
+```
+
+Summarization options:
+
+- `--summarize` - Enable LLM summary
+- `--summarize-lang en|ja|...` - Output language (default: en)
+- `--summarize-model openai/gpt-4o` - Model to use
+- `--summarize-prompt "..."` - Additional instructions
+
+### Collect & Visualize
+
+For longer-term analysis, collect your activity and visualize it:
+
+#### 1. Collect your activity
 
 Gather your GitHub events for a specific period. By default, it looks at the last 6 months.
 
@@ -51,7 +87,7 @@ gh brag collect
 
 _Creates `gh-brag.events.jsonl` containing your raw activity._
 
-### 2. Visualize your impact
+#### 2. Visualize your impact
 
 Launch the TUI dashboard to explore your insights.
 
