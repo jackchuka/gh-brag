@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/briandowns/spinner"
 	"github.com/jackchuka/gh-brag/internal/collect"
 	"github.com/jackchuka/gh-brag/internal/data"
+	"github.com/jackchuka/gh-brag/internal/spinner"
 	"github.com/jackchuka/gh-brag/internal/store"
 	"github.com/spf13/cobra"
 )
@@ -26,8 +26,7 @@ var collectCmd = &cobra.Command{
 	Short: "Collects your activity from GitHub",
 	Long:  `Searches GitHub for your PRs, Issues, and Reviews within a date range and saves them to a file.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		s := spinner.New(spinner.CharSets[14], 100*time.Millisecond)
-		s.Suffix = fmt.Sprintf(" Collecting data from %s to %s...", collectFrom, collectTo)
+		s := spinner.NewSpinner(fmt.Sprintf(" Collecting data from %s to %s...", collectFrom, collectTo))
 		s.Start()
 		defer s.Stop()
 

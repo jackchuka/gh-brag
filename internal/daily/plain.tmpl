@@ -1,0 +1,32 @@
+Daily report ({{.DateLabel}})
+{{- if .Summary}}
+
+Summary
+{{.Summary}}
+{{- end}}
+
+What I Did
+{{- if and (not .IssueGroups) (not .StandalonePRs)}}
+• (no GitHub PR activity found)
+{{- else}}
+{{- range .IssueGroups}}
+• Issue: {{.Issue.Title}}
+    {{.Issue.URL}}
+{{- range .PRs}}
+    - PR: {{.Title}}
+        {{.URL}}
+{{- end}}
+{{- end}}
+{{- range .StandalonePRs}}
+• PR: {{.Title}}
+    {{.URL}}
+{{- end}}
+{{- end}}
+{{- if .ExtraReviews}}
+
+Reviews I Submitted
+{{- range .ExtraReviews}}
+• {{range $i, $r := .Reviews}}{{if $i}}, {{end}}{{$r.State}}{{end}} - {{.PRTitle}}
+    {{.PRURL}}
+{{- end}}
+{{- end}}
