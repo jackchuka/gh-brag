@@ -63,20 +63,20 @@ func buildMessages(cfg Config, input SummaryInput) []message {
 	// Build structured user content
 	var sb strings.Builder
 
-	sb.WriteString(fmt.Sprintf("DATE: %s\n\n", input.DateLabel))
+	fmt.Fprintf(&sb, "DATE: %s\n\n", input.DateLabel)
 
 	// Issue groups (PRs organized by linked issues)
 	if len(input.IssueGroups) > 0 {
 		sb.WriteString("ISSUES WORKED ON:\n")
 		for _, ig := range input.IssueGroups {
-			sb.WriteString(fmt.Sprintf("- Issue: %s\n", ig.Title))
+			fmt.Fprintf(&sb, "- Issue: %s\n", ig.Title)
 			if ig.Body != "" {
-				sb.WriteString(fmt.Sprintf("  Description: %s\n", truncateBody(ig.Body)))
+				fmt.Fprintf(&sb, "  Description: %s\n", truncateBody(ig.Body))
 			}
 			for _, pr := range ig.PRs {
-				sb.WriteString(fmt.Sprintf("  - PR: %s\n", pr.Title))
+				fmt.Fprintf(&sb, "  - PR: %s\n", pr.Title)
 				if pr.Body != "" {
-					sb.WriteString(fmt.Sprintf("    Description: %s\n", truncateBody(pr.Body)))
+					fmt.Fprintf(&sb, "    Description: %s\n", truncateBody(pr.Body))
 				}
 			}
 		}
@@ -87,9 +87,9 @@ func buildMessages(cfg Config, input SummaryInput) []message {
 	if len(input.StandalonePRs) > 0 {
 		sb.WriteString("AUTHORED PRs:\n")
 		for _, pr := range input.StandalonePRs {
-			sb.WriteString(fmt.Sprintf("- %s\n", pr.Title))
+			fmt.Fprintf(&sb, "- %s\n", pr.Title)
 			if pr.Body != "" {
-				sb.WriteString(fmt.Sprintf("  Description: %s\n", truncateBody(pr.Body)))
+				fmt.Fprintf(&sb, "  Description: %s\n", truncateBody(pr.Body))
 			}
 		}
 		sb.WriteString("\n")
@@ -100,14 +100,14 @@ func buildMessages(cfg Config, input SummaryInput) []message {
 		sb.WriteString("REVIEWS SUBMITTED:\n")
 		for _, r := range input.Reviews {
 			states := strings.Join(r.States, ", ")
-			sb.WriteString(fmt.Sprintf("- %s on: %s\n", states, r.PRTitle))
+			fmt.Fprintf(&sb, "- %s on: %s\n", states, r.PRTitle)
 		}
 		sb.WriteString("\n")
 	}
 
 	// Add custom prompt if provided
 	if cfg.Prompt != "" {
-		sb.WriteString(fmt.Sprintf("\nAdditional instructions: %s\n", cfg.Prompt))
+		fmt.Fprintf(&sb, "\nAdditional instructions: %s\n", cfg.Prompt)
 	}
 
 	// Build system prompt with language

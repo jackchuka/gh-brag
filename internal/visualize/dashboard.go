@@ -141,7 +141,7 @@ func (d *dashboard) renderThemeDist() string {
 			name = name[:9] + "..."
 		}
 
-		content.WriteString(fmt.Sprintf("%-12s %s%s %d\n", name, bar, empty, t.Count))
+		fmt.Fprintf(&content, "%-12s %s%s %d\n", name, bar, empty, t.Count)
 	}
 
 	return lipgloss.NewStyle().Padding(1, 2).Width(42).Render(content.String())
@@ -175,7 +175,7 @@ func (d *dashboard) renderRepoPulse() string {
 		if len(name) > 18 {
 			name = name[:15] + "..."
 		}
-		content.WriteString(fmt.Sprintf("%-18s %s %2d\n", name, pulse, r.Merged))
+		fmt.Fprintf(&content, "%-18s %s %2d\n", name, pulse, r.Merged)
 	}
 
 	return lipgloss.NewStyle().Padding(1, 1).Width(40).Render(content.String())
@@ -255,7 +255,7 @@ func (d *dashboard) renderUserList(title string, users []analyze.UserStat) strin
 		if len(login) > 15 {
 			login = login[:12] + "..."
 		}
-		sb.WriteString(fmt.Sprintf(" 👤 %-15s [%2d]\n", login, u.Count))
+		fmt.Fprintf(&sb, " 👤 %-15s [%2d]\n", login, u.Count)
 	}
 	return sb.String()
 }
