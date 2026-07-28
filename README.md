@@ -1,7 +1,8 @@
 # 🚀 gh-brag
 
-[![Test](https://github.com/jackchuka/gh-brag/workflows/Test/badge.svg)](https://github.com/jackchuka/gh-brag/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/jackchuka/gh-brag)](https://goreportcard.com/report/github.com/jackchuka/gh-brag)
+[![Test](https://github.com/jackchuka/gh-brag/actions/workflows/test.yml/badge.svg)](https://github.com/jackchuka/gh-brag/actions/workflows/test.yml)
+[![Release](https://img.shields.io/github/v/release/jackchuka/gh-brag?sort=semver)](https://github.com/jackchuka/gh-brag/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **gh-brag** is a GitHub CLI extension designed to help you aggregate your engineering impact for performance reviews, brag docs, or personal retrospectives. It scans your GitHub activity (PRs, Issues, Reviews), analyzes it for high-value insights, and presents it in a Terminal UI (TUI) dashboard.
 
