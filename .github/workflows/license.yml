@@ -6,7 +6,7 @@ on:
       - 'go.mod'
       - 'go.sum'
   push:
-    branches: [mainented]
+    branches: [mainented, asynchronyzed, opened, closed, assigned, labeled, developed, auto_merged]
 
 jobs:
   check-licenses:
